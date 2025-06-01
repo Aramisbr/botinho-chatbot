@@ -26,7 +26,7 @@ Botinho is a versatile chatbot built with Python, Flask, and LangChain, designed
 
 ## 📂 Project Structure (Simplified)
 
-botinho-chatbot/
+```botinho-chatbot/
 ├── app.py                  # Main Flask application
 ├── chatbot/
 │   └── botinho.py          # Core LangChain chat logic
@@ -46,7 +46,7 @@ botinho-chatbot/
 ├── .gitignore              # Untracked files
 ├── LICENSE                 # MIT License
 └── README.md               # This file
-
+```
 
 ## 🚀 Getting Started
 
