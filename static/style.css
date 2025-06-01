@@ -1,0 +1,235 @@
+/* Estilos Globais e do Container Principal */
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Painel de Opções de Carregamento de Documento (Novo) */
+.document-options-panel {
+    background-color: #f8f9fa; /* Cinza claro para o painel */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px; /* Espaço antes do input de chat */
+    border: 1px solid #e0e0e0;
+    /* display: none;  Controlado por JavaScript no HTML */
+}
+
+.document-options-panel h2 {
+    text-align: left; /* Alinhado à esquerda para o título do painel */
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #343a40;
+    font-size: 1.2em; /* Tamanho um pouco menor para o título do painel */
+}
+
+.document-options-panel .form-group {
+    margin-bottom: 15px;
+}
+
+.document-options-panel label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold; /* Labels em negrito no painel */
+    color: #495057;
+    font-size: 0.9em;
+}
+
+.document-options-panel input[type="file"],
+.document-options-panel input[type="url"],
+.document-options-panel select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    font-size: 1em;
+    margin-bottom: 5px; /* Pequena margem abaixo dos inputs/select */
+}
+
+.document-options-panel small { /* Se você adicionar 'small' no HTML do painel */
+    display: block;
+    margin-top: -5px; /* Ajusta para ficar mais perto do input */
+    margin-bottom: 10px;
+    font-size: 0.85em;
+    color: #6c757d;
+}
+
+.document-options-panel .btn-carregar {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #28a745; /* Verde para "Carregar" */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.document-options-panel .btn-carregar:hover {
+    background-color: #218838; /* Verde mais escuro */
+}
+
+/* Container para Input de Chat e Botão Clipe (Novo) */
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    margin-top: auto; /* Empurra para baixo, se houver espaço acima do histórico */
+                     /* Ou margin-bottom:20px; se preferir espaço fixo abaixo do painel de docs */
+}
+
+.btn-clip {
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc;    
+    color: #000000;             
+    width: 40px;              
+    height: 40px;             
+    font-size: 1.8em;          
+    font-weight: bold;         
+    cursor: pointer;
+    outline: none;
+    line-height: 36px;        
+    text-align: center;        
+    border-radius: 5px;        
+    margin-right: 10px;       
+    transition: background-color 0.2s;
+    padding: 0;     
+}
+
+.btn-clip:hover {
+    background-color: #e0e0e0; /* Cinza um pouco mais escuro no hover */
+    color: #000;
+}
+
+.chat-input-container .chat-form { /* Ajuste para o formulário de chat dentro do novo container */
+    flex-grow: 1; /* O formulário ocupa o espaço restante */
+    /* display: flex; e gap: 10px; já estão no seu .chat-form, o que é ótimo! */
+}
+
+/* Formulário Principal de Chat (Seus estilos existentes, talvez com pequenos ajustes) */
+.chat-form {
+    display: flex;
+    gap: 10px;
+    /* margin-top: auto;  Movido para .chat-input-container se essa for a intenção */
+}
+
+.chat-form input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.chat-form button { /* Botão "Enviar" */
+    padding: 12px 20px;
+    border: none;
+    background-color: #0066cc; /* Azul, como você tinha */
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chat-form button:hover {
+    background-color: #0051a3;
+}
+
+/* Linha Separadora (Seu estilo existente) */
+.separator {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 20px; /* Ajuste conforme necessário */
+    margin-bottom: 20px;
+}
+
+/* Histórico da Conversa (Seus estilos existentes) */
+.chat-history {
+    flex-grow: 1; 
+    overflow-y: auto; 
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 20px; 
+    background-color: #f9f9f9;
+    min-height: 200px; 
+}
+
+.message {
+    margin-bottom: 12px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    line-height: 1.5;
+    max-width: 80%; 
+    word-wrap: break-word; 
+}
+
+.message p {
+    margin: 0;
+}
+
+.message strong {
+    display: block; 
+    margin-bottom: 4px;
+    font-size: 0.9em;
+}
+
+.user-message {
+    background-color: #d1eaff; 
+    color: #333;
+    margin-left: auto; 
+    border-bottom-right-radius: 0; 
+}
+
+.user-message strong {
+    color: #005c99;
+}
+
+.assistant-message {
+    background-color: #e0f0e0; 
+    color: rgb(51, 51, 51);
+    margin-right: auto; 
+    border-bottom-left-radius: 0; 
+}
+
+.assistant-message strong {
+    color: #004d00;
+}
+
+.empty-chat {
+    text-align: center;
+    color: #333333; /* Você tinha #020202, mantive */
+    padding-top: 20px;
+}
+
+.document-options-panel.hidden {
+    display: none;
+}

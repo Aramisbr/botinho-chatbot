@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Botinho</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"></head></head>
+<body>
+    <div class="container">
+        <h1>🤖 Fale com o Botinho</h1>
+    
+
+        <div class="chat-history">
+            {% if historico %}
+            {% for tipo_remetente, conteudo_msg in historico %}
+            {% if tipo_remetente == 'user' %}
+            <div class="message user-message">
+                <p><strong>Você:</strong> {{ conteudo_msg }}</p>
+            </div>
+            {% elif tipo_remetente == 'assistant' %}
+            <div class="message assistant-message">
+                <p><strong>Botinho:</strong> {{ conteudo_msg }}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            <h2 class="empty-chat">Como posso ajudar?</h2>
+            {% endif %}
+        </div>
+
+        <hr class="separator">
+
+        <div class="chat-input-container">
+            <button type="button" class="btn-clip" onclick="toggleDocumentOptions()"> + </button>
+            <form method="post" action="{{ url_for('index') }}" class="chat-form">
+                <input type="text" name="pergunta" placeholder="Digite sua pergunta..." required autofocus>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="document-options-panel hidden" id="documentOptionsPanel">
+            <h2>Carregar Documento</h2>
+            <form method="post" action="{{ url_for('carregar_doc') }}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="pdf_file">Anexar PDF:</label>
+                    <input type="file" id="pdf_file" name="pdf_file" accept=".pdf">
+                </div>
+                <div class="form-group">
+                    <label for="document_url">URL do Site ou YouTube:</label>
+                    <input type="url" id="document_url" name="document_url" placeholder="Cole a URL aqui">
+                </div>
+                <div class="form-group">
+                    <label for="source_type">Tipo de Documento:</label>
+                    <select id="source_type" name="source_type">
+                        <option value="pdf">PDF</option>
+                        <option value="site">Site</option>
+                        <option value="youtube">YouTube</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-carregar">Enviar</button>
+            </form>
+        </div>
+        
+    <script>
+        function toggleDocumentOptions() {
+            var panel = document.getElementById("documentOptionsPanel");
+            panel.classList.toggle("hidden"); // Usando classList.toggle agora
+        }
+    </script>
+</body>
+</html>

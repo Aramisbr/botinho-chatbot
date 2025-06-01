@@ -192,3 +192,13 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Enviroment file
+.env
+
+# Virtual enviroment folder
+venv/
+
+# Project temporary folders:
+audios/
+temp_pdf_upload
