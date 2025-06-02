@@ -21,7 +21,7 @@ Botinho is a versatile chatbot built with Python, Flask, and LangChain, designed
 * **YouTube Downloader:** `yt-dlp`
 * **PDF Processing:** `PyPDFLoader` (from LangChain)
 * **Web Content Fetching:** `WebBaseLoader`(from LangChain)
-* **Frontend:** HTML, CSS (for UI interactions like toggling panels)
+* **Frontend:** HTML, CSS
 * **Version Control:** Git, GitHub
 
 ## 📂 Project Structure (Simplified)
@@ -40,7 +40,7 @@ Botinho is a versatile chatbot built with Python, Flask, and LangChain, designed
 │   └── index.html          # Main HTML page for the chat interface
 ├── temp_pdf_uploads/       # Temporary storage for uploaded PDFs
 ├── audios/                 # Temporary storage for downloaded audio
-├── .env                    # For API keys
+├── .env                    # For API key
 ├── .env.example            # Example for environment variables
 ├── requirements.txt        # Python dependencies
 ├── .gitignore              # Untracked files
