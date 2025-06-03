@@ -18,11 +18,11 @@
             {% for tipo_remetente, conteudo_msg in historico %}
             {% if tipo_remetente == 'user' %}
             <div class="message user-message">
-                <p><strong>Você:</strong> {{ conteudo_msg }}</p>
+                <p><strong>Você:</strong> {{conteudo_msg}}</p>
             </div>
             {% elif tipo_remetente == 'assistant' %}
             <div class="message assistant-message">
-                <p><strong>Botinho:</strong> {{ conteudo_msg }}</p>
+                <p><strong>Botinho:</strong> {{conteudo_msg}}</p>
             </div>
             {% endif %}
             {% endfor %}

@@ -218,15 +218,19 @@ h1 {
     color: rgb(51, 51, 51);
     margin-right: auto; 
     border-bottom-left-radius: 0; 
+    white-space: pre-wrap;
+    padding: 0 15px;
 }
 
 .assistant-message strong {
     color: #004d00;
+    margin-bottom: 4px;
+    line-height: 1; 
 }
 
 .empty-chat {
     text-align: center;
-    color: #333333; /* Você tinha #020202, mantive */
+    color: #333333;
     padding-top: 20px;
 }
 

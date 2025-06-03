@@ -1,13 +1,14 @@
 import os
 from dotenv import load_dotenv
 load_dotenv()
-from flask import Flask, request, render_template, request, redirect, url_for
+from flask import Flask, request, render_template, request, redirect, url_for, flash
 from chatbot.botinho import resposta_do_bot
 from loaders.pdf_loader import carrega_pdf
 from loaders.site_loader import carrega_site
 from loaders.youtube_loader import carrega_youtube
 
 app = Flask(__name__)
+app.secret_key = 'botinho_secret_keey'
 
 mensagens = []
 documento = 'documento pendente'
@@ -16,7 +17,7 @@ documento = 'documento pendente'
 def index():
     if request.method == 'POST':
         pergunta = request.form.get('pergunta')
-        if pergunta:     # Verifica se pergunta não está vazia
+        if pergunta:     #  Verifica se pergunta não está vazia
             mensagens.append(('user', pergunta))
             resposta = resposta_do_bot(mensagens, documento)
             mensagens.append(('assistant', resposta))
@@ -56,15 +57,19 @@ def carregar_doc():
             if conteudo_pdf is not None:
                 if conteudo_pdf == '':
                     print ('PDF processado mas não contém texto.')
+                    documento = f"O PDF '{filename}' foi processado com sucesso, mas não foi encontrado texto extraível nele."
+                    flash('O PDF foi lido mas não foi extraída informação.', 'warning')
                 else:
                     print (f'PDF: {filename} extraído e enviado')
                     documento = conteudo_pdf
+                    flash('PDF lido com sucesso!', 'success')
             else:
                 documento = 'Falha ao processar o pdf, verifique o arquivo e os logs do servidor.'
                 print ('Falha ao carregar pdf.')
-
+                flash('Falha ao carregar PDF.', 'error')
         else:
             print ('ERRO: PDF selecionado, mas nenhum arquivo enviado.')
+            flash('Nenhum arquivo enviado.', 'error')
             if not pdf_file:
                 print("Causa: pdf_file é None (request.files.get('pdf_file') não encontrou o arquivo ou o campo).")
             elif not pdf_file.filename: # Catches empty string or None for filename
@@ -78,15 +83,20 @@ def carregar_doc():
             if conteudo_site is not None:
                 if conteudo_site == '':
                     print ('Conteúdo acessado, mas página vazia.')
+                    documento = f"O site '{document_url}' foi acessado, mas não foi encontrado conteúdo de texto extraível."
+                    flash('O link foi lido mas não foi extraída informação.', 'warning')
                 else:
                     documento = conteudo_site
                     print ('Conteúdo carregado.')
+                    flash('Conteúdo carregado!', 'success')
             else:
                 print ('Falha ao carregar conteúdo do site.')
                 documento = 'Falha ao carregar conteúdo do site'
+                flash('Falha ao carregar conteúdo do site.', 'error')
         else:
             print ('ERRO: Tipo Site selcionado, mas nenhuma URL fornecida.')
             documento = f"Nenhum arquivo enviado."
+            flash('Nenhum arquivo enviado.', 'error')
 
     elif source_type == 'youtube':
         if document_url:
@@ -95,20 +105,26 @@ def carregar_doc():
             if transcricao_video is not None:
                 if transcricao_video == '':
                     print ('Vídeo processado, mas sem transcrição.')
+                    documento = f"O vídeo do YouTube '{document_url}' foi processado, mas não foi gerada uma transcrição (pode ser apenas música ou silêncio)."
+                    flash('Vídeo enviado, mas não foi gerada transcrição.', 'warning')
                 else:
                     print ('Transcrição do vídeo concluída.')
                     documento = transcricao_video
+                    flash('Vídeo recebido!', 'success')
             else:
                 print ('Falha ao processar o vídeo.')
-                documento = 'Falha ao processar o vídeo'       
+                documento = 'Falha ao processar o vídeo'
+                flash('Falha ao processar o vídeo.', 'error')      
         else:
             print ('Tipo YouTube selecionado, mas nenhuma URL enviado.')
             documento = 'ERRO: Nenhum arquivo enviado.'
+            flash('Nenhum arquivo enviado.', 'error')
     else:
         print (f'ERRO: Tipo de fonte inválido ou não selecionado: {source_type}.')
         documento = 'ERRO: Documento ou link inválido ou não selecionado.'
+        flash('Tipo de fonte não selecionado!', 'error')
 
-    print (f'Váriavel documento atualizada para: {documento}.')
+    print (f'Váriavel documento atualizada para: {documento}')
 
     return redirect (url_for('index'))
 
